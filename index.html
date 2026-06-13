@@ -98,6 +98,23 @@
   .panel-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px; }
   .panel-card h3 { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:14px; }
 
+  /* บังคับสมการมาตรฐานให้อยู่บรรทัดเดียว ไม่ตกหล่น */
+  .equation-container {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.15rem; /* ปรับลดขนาดลงเล็กน้อยเพื่อให้พอดีกับความกว้าง 320px */
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap; /* ห้ามขึ้นบรรทัดใหม่ทุกกรณี */
+    overflow: hidden;
+    text-overflow: clip;
+    padding: 12px 0;
+    font-weight: 600;
+    letter-spacing: 0.02em; /* ลดระยะห่างตัวอักษรลงเล็กน้อย */
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  }
+
   .param-row { margin-bottom:12px; }
   .param-row:last-child { margin-bottom:0; }
   .param-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; font-size:.86rem; }
@@ -142,6 +159,7 @@
 </header>
 
 <div class="main-grid">
+  <!-- LEFT: Main canvas -->
   <div>
     <div class="canvas-card">
       <canvas id="waveCanvas"></canvas>
@@ -169,14 +187,17 @@
     </div>
   </div>
 
+  <!-- RIGHT: Controls -->
   <div class="panel">
-    <div class="panel-card" style="border: 1px solid var(--accent); background: linear-gradient(135deg, var(--surface), var(--card));">
+    <!-- แก้ไขกรอบนี้ให้แสดงผลเป็นแถวเดี่ยว ไม่ตกบรรทัด -->
+    <div class="panel-card" style="border: 1px solid var(--accent); background: linear-gradient(135deg, var(--surface), var(--card)); padding: 18px 12px;">
       <h3>📐 รูปแบบสมการมาตรฐาน</h3>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; color: var(--accent); text-align: center; padding: 12px 0; font-weight: 600; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">
+      <div class="equation-container">
         y = A sin(Bx - C) + D
       </div>
     </div>
 
+    <!-- AMPLITUDE -->
     <div class="panel-card">
       <h3>📏 แอมพลิจูด (A)</h3>
       <div class="param-row">
@@ -189,6 +210,7 @@
         ค่าสูงสุด = A, ค่าต่ำสุด = −A
       </div>
     </div>
+    <!-- FREQUENCY -->
     <div class="panel-card">
       <h3>🔄 ความถี่ / คาบ (B)</h3>
       <div class="param-row">
@@ -201,6 +223,7 @@
         B &lt; 1 → <strong>ยืดแนวนอน</strong> (คาบยาว)
       </div>
     </div>
+    <!-- PHASE -->
     <div class="panel-card">
       <h3>↔️ การเลื่อนเฟส (C)</h3>
       <div class="param-row">
@@ -212,6 +235,7 @@
         การเลื่อน = C/B หน่วย
       </div>
     </div>
+    <!-- VERTICAL -->
     <div class="panel-card">
       <h3>⬆️ เลื่อนแนวตั้ง (D)</h3>
       <div class="param-row">
@@ -223,6 +247,7 @@
         Midline อยู่ที่ y = D
       </div>
     </div>
+    <!-- DISPLAY -->
     <div class="panel-card">
       <h3>👁️ การแสดงผล</h3>
       <div class="toggle-row">
@@ -238,10 +263,12 @@
   </div>
 </div>
 
+<!-- ====== STRETCH EXPLANATION SECTION ====== -->
 <div class="stretch-section">
   <h2>📐 การยืดและหดของกราฟ — เปรียบเทียบแบบ Visual</h2>
   <div class="stretch-grid">
 
+    <!-- VERTICAL STRETCH -->
     <div class="stretch-card">
       <h3>การยืด/หด แนวตั้ง (A)</h3>
       <canvas id="cvA" height="130"></canvas>
@@ -266,6 +293,7 @@
       </p>
     </div>
 
+    <!-- HORIZONTAL STRETCH -->
     <div class="stretch-card">
       <h3>การยืด/หด แนวนอน (B)</h3>
       <canvas id="cvB" height="130"></canvas>
@@ -290,6 +318,7 @@
       </p>
     </div>
 
+    <!-- PHASE SHIFT viz -->
     <div class="stretch-card">
       <h3>การเลื่อนเฟส (C) — ซ้าย/ขวา</h3>
       <canvas id="cvC" height="130"></canvas>
@@ -297,6 +326,7 @@
         <span id="badgeC" class="status-badge badge-normal">● ไม่เลื่อน (C = 0)</span>
         <span id="shiftShow" style="font-size:.78rem; color:var(--muted);">เลื่อน 0 หน่วย</span>
       </div>
+      <!-- Phase arrow visual -->
       <div class="stretch-indicator" style="margin-top:10px;">
         <span style="font-size:.75rem;color:var(--muted);width:32px;text-align:center;">←</span>
         <div style="flex:1;height:10px;background:var(--card);border-radius:5px;position:relative;border:1px solid var(--border);">
@@ -310,6 +340,7 @@
       </p>
     </div>
 
+    <!-- VERTICAL SHIFT viz -->
     <div class="stretch-card">
       <h3>การเลื่อนแนวตั้ง (D) — ขึ้น/ลง</h3>
       <canvas id="cvD" height="130"></canvas>
@@ -317,6 +348,7 @@
         <span id="badgeD" class="status-badge badge-normal">● กลาง (D = 0)</span>
         <span id="midlineShow" style="font-size:.78rem; color:var(--muted);">Midline: y = 0</span>
       </div>
+      <!-- Vertical shift bar -->
       <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
         <span style="font-size:.75rem;color:var(--muted);">↓ −2</span>
         <div style="flex:1;height:10px;background:var(--card);border-radius:5px;position:relative;border:1px solid var(--border);">
@@ -426,7 +458,7 @@ function drawMain(ts) {
     ctx.stroke(); ctx.setLineDash([]);
   }
 
-  // Main wave (ใช้สูตร y = A*sin(B*x - C) เพื่อให้ล้อกับฟอร์มมาตรฐาน)
+  // Main wave
   const grad = ctx.createLinearGradient(0,0,W,0);
   grad.addColorStop(0,'#818cf8'); grad.addColorStop(0.5,'#38bdf8'); grad.addColorStop(1,'#34d399');
   ctx.strokeStyle=grad; ctx.lineWidth=3; ctx.shadowBlur=12; ctx.shadowColor='#38bdf860';
@@ -461,7 +493,7 @@ function drawMain(ts) {
 }
 
 // ============================================================
-// MINI CANVASES — stretch explanation
+// MINI CANVASES
 // ============================================================
 function resizeMini(id) {
   const c = document.getElementById(id);
@@ -480,7 +512,6 @@ function drawMini(id, waveFn, refFn, color, refColor) {
   ctx2.clearRect(0,0,W,H);
   ctx2.fillStyle='#0d1423'; ctx2.fillRect(0,0,W,H);
 
-  // Light grid
   ctx2.strokeStyle='#1a2540'; ctx2.lineWidth=1;
   for(let x=-xRange/2;x<=xRange/2;x+=Math.PI/2){
     const px=cx+x*scaleX; ctx2.beginPath(); ctx2.moveTo(px,0); ctx2.lineTo(px,H); ctx2.stroke();
@@ -488,12 +519,10 @@ function drawMini(id, waveFn, refFn, color, refColor) {
   for(let y=-2;y<=2;y+=1){
     const py=cy-y*scaleY; ctx2.beginPath(); ctx2.moveTo(0,py); ctx2.lineTo(W,py); ctx2.stroke();
   }
-  // Axes
   ctx2.strokeStyle='#2d3f5a'; ctx2.lineWidth=1.2;
   ctx2.beginPath(); ctx2.moveTo(0,cy); ctx2.lineTo(W,cy); ctx2.stroke();
   ctx2.beginPath(); ctx2.moveTo(cx,0); ctx2.lineTo(cx,H); ctx2.stroke();
 
-  // Reference
   ctx2.strokeStyle=refColor||'#3b4f6a'; ctx2.lineWidth=1.5; ctx2.setLineDash([4,3]);
   ctx2.beginPath();
   for(let px=0;px<=W;px++){
@@ -502,7 +531,6 @@ function drawMini(id, waveFn, refFn, color, refColor) {
   }
   ctx2.stroke(); ctx2.setLineDash([]);
 
-  // Main
   ctx2.strokeStyle=color; ctx2.lineWidth=2.5;
   ctx2.shadowBlur=8; ctx2.shadowColor=color+'80';
   ctx2.beginPath();
@@ -514,39 +542,14 @@ function drawMini(id, waveFn, refFn, color, refColor) {
 }
 
 function drawMiniCanvases() {
-  // A — vertical stretch
-  drawMini('cvA',
-    x => A*Math.sin(x+phase),
-    x => Math.sin(x+phase),
-    '#38bdf8','#3b4f6a'
-  );
-
-  // B — horizontal stretch
-  drawMini('cvB',
-    x => Math.sin(B*x+phase),
-    x => Math.sin(x+phase),
-    '#818cf8','#3b4f6a'
-  );
-
-  // C — phase shift (frozen)
-  drawMini('cvC',
-    x => Math.sin(x - C),
-    x => Math.sin(x),
-    '#fb7185','#3b4f6a'
-  );
-
-  // D — vertical shift
-  drawMini('cvD',
-    x => Math.sin(x+phase)+D,
-    x => Math.sin(x+phase),
-    '#34d399','#3b4f6a'
-  );
-
+  drawMini('cvA', x => A*Math.sin(x+phase), x => Math.sin(x+phase), '#38bdf8','#3b4f6a');
+  drawMini('cvB', x => Math.sin(B*x+phase), x => Math.sin(x+phase), '#818cf8','#3b4f6a');
+  drawMini('cvC', x => Math.sin(x - C), x => Math.sin(x), '#fb7185','#3b4f6a');
+  drawMini('cvD', x => Math.sin(x+phase)+D, x => Math.sin(x+phase), '#34d399','#3b4f6a');
   updateStretchUI();
 }
 
 function updateStretchUI() {
-  // === A ===
   const pctA = Math.min((A/3)*100, 100);
   document.getElementById('barA').style.width = pctA+'%';
   document.getElementById('barAval').textContent = 'A = '+A.toFixed(2);
@@ -562,7 +565,6 @@ function updateStretchUI() {
     document.getElementById('txtA').textContent=`A = ${A.toFixed(2)} → หดเตี้ยลง เหลือ ${(A*100).toFixed(0)}% ของต้นฉบับ ค่าสูงสุด = ±${A.toFixed(2)}`;
   }
 
-  // === B ===
   const T = (2*Math.PI)/Math.abs(B);
   const pctB = Math.min((T/(4*Math.PI))*100, 100);
   document.getElementById('barB').style.width = pctB+'%';
@@ -580,7 +582,6 @@ function updateStretchUI() {
     document.getElementById('txtB').textContent=`B = ${B.toFixed(2)} → คาบยาวขึ้น กราฟยืดแนวนอน ต้องใช้ระยะ ${T.toFixed(2)} หน่วยต่อ 1 รอบ`;
   }
 
-  // === C ===
   const shift = C/B;
   const phasePct = 50 + (C/(2*Math.PI))*100;
   document.getElementById('phaseArrow').style.left = Math.max(2,Math.min(98,phasePct))+'%';
@@ -598,7 +599,6 @@ function updateStretchUI() {
     document.getElementById('txtC').textContent=`C = ${Cpi.toFixed(2)}π → กราฟเลื่อนไปทางซ้าย ${Math.abs(shift).toFixed(2)} หน่วย`;
   }
 
-  // === D ===
   const vPct = 50 - (D/4)*100;
   document.getElementById('vshiftBar').style.left = Math.max(2,Math.min(98,vPct))+'%';
   document.getElementById('midlineShow').textContent = `Midline: y = ${D.toFixed(2)}`;
@@ -624,7 +624,6 @@ function updateFormula() {
   document.getElementById('curF').textContent=f.toFixed(3)+' Hz';
   const Cpi=C/Math.PI;
   
-  // แปลงการแสดงผลบนป้ายด้านบนให้สอดคล้องกับรูปแบบลบ (Bx - C)
   const cStr=Math.abs(Cpi)>0.005?(C>=0?' - ':' + ')+(Math.abs(Cpi).toFixed(2))+'π':'';
   const dStr=Math.abs(D)>0.005?(D>=0?' + ':' - ')+Math.abs(D).toFixed(2):'';
   
@@ -684,7 +683,7 @@ document.getElementById('resetBtn').addEventListener('click',()=>{
   document.getElementById('valC').textContent='0.00π'; document.getElementById('valD').textContent='0.00';
   updateFormula();
 });
-// Resize mini
+// Resize
 window.addEventListener('resize',()=>{
   resizeMain();
   ['cvA','cvB','cvC','cvD'].forEach(resizeMini);
