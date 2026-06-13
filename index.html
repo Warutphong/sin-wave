@@ -3,36 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>กราฟ Sin — อนิเมชั่นเชิงโต้ตอบ (Custom Retro-Light Mode)</title>
+<title>กราฟ Sin — อนิเมชั่นเชิงโต้ตอบ (Custom Retro-Dark Mode)</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
   
-  /* ========== ปรับโทนสีตามพาเลทจากภาพ image_ef60e4.png ========== */
+  /* ========== ปรับเป็นธีมมืด (Dark Mode) อิงพาเลทสีเดิม ========== */
   :root {
-    --bg: #fbfbf9;          /* พื้นหลังหลัก สว่างนวลสะอาดตา */
-    --surface: #ffffff;     /* พื้นหลังการ์ดหลัก */
-    --card: #fdf8f0;        /* พื้นหลังกล่องย่อย อิงโทน Beige (#FDEB9E) แบบโปร่งจาง */
-    --border: #e2e8e4;      /* เส้นขอบสีเทาอมเขียวมินต์จางๆ */
+    --bg: #06202B;          /* พื้นหลังหลัก: ปรับเป็นสีกรมท่าเข้มสุดในภาพ สบายตา ไม่สว่างจ้า */
+    --surface: #0b2b39;     /* พื้นหลังการ์ดหลัก: สีกรมท่าสว่างขึ้นมาหนึ่งเฉด */
+    --card: #093444;        /* พื้นหลังกล่องย่อย */
+    --border: #14495c;      /* เส้นขอบสีฟ้าอมเขียวเข้ม */
     
-    /* แมปปิ้งสีหลักจากภาพ */
-    --beige: #FDEB9E;       /* สีครีมเบจ / เหลืองพาสเทล */
+    /* แมปปิ้งสีหลักจากภาพสำหรับเน้นจุดสำคัญ */
+    --beige: #FDEB9E;       /* สีครีมเบจ / เหลืองพาสเทล (ใช้เป็นไฮไลต์อักษร) */
     --mint: #7AE2CF;        /* สีเขียวมินต์สดใส */
-    --teal: #077A7D;        /* สีเขียวหัวเป็ด / เทลเข้ม */
-    --navy: #06202B;        /* สีน้ำเงินเข้ม / กรมท่า */
+    --teal: #077A7D;        /* สีเขียวหัวเป็ด / เทล */
+    --navy: #06202B;        /* สีกรมท่าเข้ม */
     
     /* จัดสรรสีสำหรับพารามิเตอร์ต่างๆ */
-    --accent: #077A7D;      /* สีหลักของแอมพลิจูด (Teal) */
-    --accent2: #2563eb;     /* สีน้ำเงินสดสำหรับความถี่ */
-    --accent3: #db2777;     /* สีชมพูสำหรับเฟส */
-    --green: #059669;       /* สีเขียวสำหรับแนวตั้ง */
+    --accent: #7AE2CF;      /* สีหลักของแอมพลิจูด เปลี่ยนมาใช้สีมินต์ให้เด่นในความมืด */
+    --accent2: #60a5fa;     /* สีน้ำเงินสว่างสำหรับความถี่ */
+    --accent3: #f472b6;     /* สีชมพูสว่างสำหรับเฟส */
+    --green: #34d399;       /* สีเขียวสว่างสำหรับแนวตั้ง */
     
-    --text: #06202B;        /* ตัวอักษรหลัก ใช้สี Navy เข้มเพื่อความคมชัด */
-    --muted: #4a5d66;       /* ตัวอักษรรอง */
-    --label: #2c3e46;       /* ป้ายกำกับ */
+    --text: #e2e8f0;        /* ตัวอักษรหลัก: เปลี่ยนเป็นสีขาวนวลแกมเทา */
+    --muted: #94a3b8;       /* ตัวอักษรรอง */
+    --label: #cbd5e1;       /* ป้ายกำกับ */
     
-    /* การไล่เฉดสี (Gradients) จากพาเลทรูปภาพ */
-    --gradient-primary: linear-gradient(135deg, #7AE2CF, #077A7D); /* Mint to Teal */
-    --gradient-equation: linear-gradient(135deg, #fdfaf2, #eefaf7); /* Beige จาง ไป Mint จาง */
+    /* การไล่เฉดสี (Gradients) ในธีมมืด */
+    --gradient-primary: linear-gradient(135deg, #7AE2CF, #077A7D); 
+    --gradient-equation: linear-gradient(135deg, #093444, #0b2b39); 
   }
   
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -41,21 +41,21 @@
 
   header { text-align:center; margin-bottom:28px; }
   header h1 { font-size:clamp(1.5rem,4vw,2.3rem); font-weight:700; letter-spacing:-0.02em;
-    background: linear-gradient(135deg, #077A7D, #06202B); -webkit-background-clip:text;
+    background: linear-gradient(135deg, #7AE2CF, #FDEB9E); -webkit-background-clip:text;
     -webkit-text-fill-color:transparent; background-clip:text; }
   header p { color:var(--muted); margin-top:6px; font-size:.9rem; }
   
   .formula-badge { display:inline-block; margin-top:10px; background:var(--surface);
     border:1px solid var(--border); border-radius:8px; padding:7px 18px;
-    font-family:'JetBrains Mono',monospace; font-size:.95rem; color:var(--teal);
-    box-shadow: 0 2px 8px rgba(7,122,125,0.06); }
+    font-family:'JetBrains Mono',monospace; font-size:.95rem; color:var(--mint);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
   .main-grid { width:100%; max-width:1120px; display:grid; grid-template-columns:1fr 320px; gap:20px; }
   @media(max-width:820px){ .main-grid{grid-template-columns:1fr;} }
 
   /* Canvas card */
   .canvas-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:20px;
-    box-shadow: 0 4px 20px rgba(6,32,43,0.04); }
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
   canvas { width:100%; display:block; border-radius:8px; }
   #waveCanvas { height:340px; }
 
@@ -67,7 +67,7 @@
   .play-btn { width:40px; height:40px; border-radius:50%; border:none; background:var(--gradient-primary);
     color:#ffffff; font-size:1rem; cursor:pointer; display:flex; align-items:center;
     justify-content:center; transition:transform .15s,box-shadow .15s; flex-shrink:0; }
-  .play-btn:hover { transform:scale(1.08); box-shadow:0 4px 14px rgba(7,122,125,0.3); }
+  .play-btn:hover { transform:scale(1.08); box-shadow:0 4px 14px rgba(122,226,207,0.3); }
   
   .speed-group { display:flex; gap:5px; flex-wrap:wrap; }
   .speed-btn { padding:4px 10px; border-radius:20px; border:1px solid var(--border);
@@ -78,7 +78,7 @@
   .readout-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
   .readout-item { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:9px 11px; }
   .readout-label { font-size:.7rem; color:var(--muted); margin-bottom:2px; }
-  .readout-val { font-family:'JetBrains Mono',monospace; font-size:.9rem; color:var(--navy); font-weight:600; }
+  .readout-val { font-family:'JetBrains Mono',monospace; font-size:.9rem; color:var(--mint); font-weight:600; }
 
   /* ========== STRETCH SECTION ========== */
   .stretch-section { width:100%; max-width:1120px; margin-top:20px; }
@@ -89,7 +89,7 @@
   @media(max-width:640px){ .stretch-grid{grid-template-columns:1fr;} }
 
   .stretch-card { background:var(--surface); border:1px solid var(--border); border-radius:14px;
-    padding:16px; position:relative; overflow:hidden; box-shadow: 0 4px 12px rgba(6,32,43,0.02); }
+    padding:16px; position:relative; overflow:hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
   .stretch-card h3 { font-size:.78rem; text-transform:uppercase; letter-spacing:.07em;
     color:var(--muted); margin-bottom:10px; }
   .stretch-card canvas { width:100%; height:130px; display:block; border-radius:6px; }
@@ -99,7 +99,7 @@
   .arrow-box { position:relative; flex:1; height:36px; background:var(--card);
     border:1px solid var(--border); border-radius:8px; overflow:hidden; }
   .arrow-fill { position:absolute; top:0; left:0; height:100%;
-    background:linear-gradient(90deg, rgba(7,122,125,0.1), rgba(7,122,125,0.2)); border-radius:8px;
+    background:linear-gradient(90deg, rgba(7,122,125,0.2), rgba(7,122,125,0.4)); border-radius:8px;
     transition:width .15s ease; }
   .arrow-label { position:absolute; inset:0; display:flex; align-items:center;
     justify-content:center; font-size:.82rem; font-weight:600; font-family:'Sarabun',sans-serif; }
@@ -109,9 +109,9 @@
   /* Status badge */
   .status-badge { display:inline-flex; align-items:center; gap:5px; padding:3px 10px;
     border-radius:20px; font-size:.75rem; font-weight:600; border:1px solid; }
-  .badge-stretch { background:rgba(7,122,125,0.1); color:var(--teal); border-color:var(--teal); }
-  .badge-shrink  { background:rgba(219,39,119,0.1); color:var(--accent3); border-color:var(--accent3); }
-  .badge-normal  { background:rgba(6,32,43,0.06); color:var(--navy);   border-color:var(--navy); }
+  .badge-stretch { background:rgba(7,122,125,0.2); color:var(--mint); border-color:var(--mint); }
+  .badge-shrink  { background:rgba(219,39,119,0.2); color:var(--accent3); border-color:var(--accent3); }
+  .badge-normal  { background:rgba(255,255,255,0.06); color:var(--text);   border-color:var(--border); }
 
   /* Comparison bars */
   .cmp-bar-wrap { margin-top:8px; }
@@ -124,14 +124,14 @@
   /* Panel */
   .panel { display:flex; flex-direction:column; gap:14px; }
   .panel-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px;
-    box-shadow: 0 4px 12px rgba(6,32,43,0.02); }
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
   .panel-card h3 { font-size:.78rem; text-transform:uppercase; letter-spacing:#0ea5e9; color:var(--muted); margin-bottom:14px; }
 
-  /* กรอบสมการไล่เฉดสีพาสเทลละมุนตา บรรทัดเดียว */
+  /* กรอบสมการรูปแบบธีมมืด */
   .equation-container {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.15rem;
-    color: var(--navy);
+    color: var(--beige);  /* สีครีมเบจตัดกับความมืดได้อย่างสวยงาม */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,7 +141,6 @@
     padding: 12px 0;
     font-weight: 600;
     letter-spacing: 0.02em;
-    text-shadow: 0 1px 2px rgba(6,32,43,0.05);
   }
 
   .param-row { margin-bottom:12px; }
@@ -155,16 +154,16 @@
   input[type=range] { -webkit-appearance:none; width:100%; height:6px; border-radius:3px;
     background:var(--border); outline:none; cursor:pointer; }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px;
-    border-radius:50%; background:var(--teal); box-shadow:0 2px 6px rgba(7,122,125,0.2); transition:transform .1s; }
+    border-radius:50%; background:var(--mint); box-shadow:0 2px 6px rgba(122,226,207,0.4); transition:transform .1s; }
   input[type=range]:hover::-webkit-slider-thumb { transform:scale(1.2); }
-  input[type=range].purple::-webkit-slider-thumb { background:var(--accent2); box-shadow:0 2px 6px rgba(37,99,235,0.2); }
-  input[type=range].pink::-webkit-slider-thumb   { background:var(--accent3); box-shadow:0 2px 6px rgba(219,39,119,0.2); }
-  input[type=range].green::-webkit-slider-thumb  { background:var(--green);   box-shadow:0 2px 6px rgba(5,150,105,0.2); }
+  input[type=range].purple::-webkit-slider-thumb { background:var(--accent2); box-shadow:0 2px 6px rgba(96,165,250,0.4); }
+  input[type=range].pink::-webkit-slider-thumb   { background:var(--accent3); box-shadow:0 2px 6px rgba(244,114,182,0.4); }
+  input[type=range].green::-webkit-slider-thumb  { background:var(--green);   box-shadow:0 2px 6px rgba(52,211,153,0.4); }
 
   /* Info Boxes */
-  .info-box { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--teal);
+  .info-box { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--mint);
     border-radius:0 8px 8px 0; padding:10px 12px; font-size:.82rem; line-height:1.6; color:var(--label); margin-top:4px; }
-  .info-box strong { color:var(--teal); }
+  .info-box strong { color:var(--mint); }
   .info-box.purple { border-left-color:var(--accent2); } .info-box.purple strong { color:var(--accent2); }
   .info-box.pink   { border-left-color:var(--accent3); } .info-box.pink   strong { color:var(--accent3); }
   .info-box.green  { border-left-color:var(--green);   } .info-box.green  strong { color:var(--green);   }
@@ -173,12 +172,12 @@
   .toggle-btn { flex:1; min-width:72px; padding:6px 8px; border-radius:7px; border:1px solid var(--border);
     background:var(--card); color:var(--muted); font-size:.78rem; cursor:pointer;
     transition:all .15s; font-family:'Sarabun',sans-serif; text-align:center; }
-  .toggle-btn.on { border-color:var(--teal); color:var(--teal); background:rgba(7,122,125,0.08); font-weight:600; }
+  .toggle-btn.on { border-color:var(--mint); color:var(--mint); background:rgba(122,226,207,0.1); font-weight:600; }
 
   .reset-btn { width:100%; padding:8px; border-radius:8px; border:1px solid var(--border);
-    background:var(--surface); color:var(--navy); font-size:.83rem; cursor:pointer;
-    transition:all .15s; font-family:'Sarabun',sans-serif; box-shadow: 0 2px 4px rgba(6,32,43,0.02); font-weight:600; }
-  .reset-btn:hover { border-color:var(--accent3); color:var(--accent3); background:rgba(219,39,119,0.02); }
+    background:var(--surface); color:var(--text); font-size:.83rem; cursor:pointer;
+    transition:all .15s; font-family:'Sarabun',sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-weight:600; }
+  .reset-btn:hover { border-color:var(--accent3); color:var(--accent3); background:rgba(244,114,182,0.05); }
 </style>
 </head>
 <body>
@@ -195,9 +194,9 @@
     <div class="canvas-card">
       <canvas id="waveCanvas"></canvas>
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#077A7D"></div>กราฟหลัก</div>
-        <div class="legend-item" id="refLegend" style="display:none"><div class="legend-dot" style="background:#94a3b8"></div>y=sin(x)</div>
-        <div class="legend-item" id="unitLegend" style="display:none"><div class="legend-dot" style="background:#05966980"></div>Amplitude</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7AE2CF"></div>กราฟหลัก</div>
+        <div class="legend-item" id="refLegend" style="display:none"><div class="legend-dot" style="background:#475569"></div>y=sin(x)</div>
+        <div class="legend-item" id="unitLegend" style="display:none"><div class="legend-dot" style="background:#34d39980"></div>Amplitude</div>
       </div>
       <div class="playbar">
         <button class="play-btn" id="playBtn">▶</button>
@@ -220,8 +219,7 @@
 
   <!-- RIGHT: Controls -->
   <div class="panel">
-    <!-- กรอบสมการใช้คู่เฉดสีจากภาพพาสเทลบวกความคมขรึมของสีกรมท่า -->
-    <div class="panel-card" style="border: 1px solid #7AE2CF; background: var(--gradient-equation); padding: 18px 12px;">
+    <div class="panel-card" style="border: 1px solid #077A7D; background: var(--gradient-equation); padding: 18px 12px;">
       <h3>📐 รูปแบบสมการมาตรฐาน</h3>
       <div class="equation-container">
         y = A sin(Bx - C) + D
@@ -310,13 +308,13 @@
       <div class="cmp-bar-wrap">
         <div class="cmp-row">
           <span class="cmp-lbl">ต้นฉบับ</span>
-          <div class="cmp-track"><div class="cmp-fill" style="width:33.3%;background:#cbd5e1"></div></div>
+          <div class="cmp-track"><div class="cmp-fill" style="width:33.3%;background:#475569"></div></div>
           <span class="cmp-val">A = 1.00</span>
         </div>
         <div class="cmp-row">
-          <span class="cmp-lbl" style="color:var(--teal)">ปัจจุบัน</span>
-          <div class="cmp-track"><div class="cmp-fill" id="barA" style="width:33.3%;background:var(--teal)"></div></div>
-          <span class="cmp-val" id="barAval" style="color:var(--teal)">A = 1.00</span>
+          <span class="cmp-lbl" style="color:var(--mint)">ปัจจุบัน</span>
+          <div class="cmp-track"><div class="cmp-fill" id="barA" style="width:33.3%;background:var(--mint)"></div></div>
+          <span class="cmp-val" id="barAval" style="color:var(--mint)">A = 1.00</span>
         </div>
       </div>
       <p style="font-size:.78rem;color:var(--muted);margin-top:8px;line-height:1.6;" id="txtA">
@@ -335,7 +333,7 @@
       <div class="cmp-bar-wrap">
         <div class="cmp-row">
           <span class="cmp-lbl">ต้นฉบับ</span>
-          <div class="cmp-track"><div class="cmp-fill" style="width:50%;background:#cbd5e1"></div></div>
+          <div class="cmp-track"><div class="cmp-fill" style="width:50%;background:#475569"></div></div>
           <span class="cmp-val">T = 2π</span>
         </div>
         <div class="cmp-row">
@@ -361,7 +359,7 @@
         <span style="font-size:.75rem;color:var(--muted);width:32px;text-align:center;">←</span>
         <div style="flex:1;height:10px;background:var(--card);border-radius:5px;position:relative;border:1px solid var(--border);">
           <div id="phaseArrow" style="position:absolute;top:0;height:100%;background:var(--accent3);border-radius:5px;width:2px;left:50%;transform:translateX(-50%);transition:left .15s;"></div>
-          <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#cbd5e1;"></div>
+          <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#475569;"></div>
         </div>
         <span style="font-size:.75rem;color:var(--muted);width:32px;text-align:center;">→</span>
       </div>
@@ -382,7 +380,7 @@
         <span style="font-size:.75rem;color:var(--muted);">↓ −2</span>
         <div style="flex:1;height:10px;background:var(--card);border-radius:5px;position:relative;border:1px solid var(--border);">
           <div id="vshiftBar" style="position:absolute;top:0;height:100%;background:var(--green);border-radius:5px;width:2px;left:50%;transform:translateX(-50%);transition:left .15s;"></div>
-          <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#cbd5e1;"></div>
+          <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#475569;"></div>
         </div>
         <span style="font-size:.75rem;color:var(--muted);">+2 ↑</span>
       </div>
@@ -431,10 +429,10 @@ function drawMain(ts) {
   const scaleY = Math.min(W/xRange, H/6);
 
   ctx.clearRect(0,0,W,H);
-  ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,W,H); // พื้นหลังแคนวาสหลักขาวสะอาด
+  ctx.fillStyle = '#0b2b39'; ctx.fillRect(0,0,W,H); // เปลี่ยนพื้นหลังแคนวาสเป็นเฉดสีมืด
 
   if (showGrid) {
-    ctx.strokeStyle = '#f4f6f5'; ctx.lineWidth = 1; // ตารางตีกริดจางๆ อิงโทนมินต์สว่างมาก
+    ctx.strokeStyle = '#0d384a'; ctx.lineWidth = 1; // ตีกริดแบบมืดกลืนไปกับพื้นหลัง
     for (let x=-xRange/2; x<=xRange/2; x+=Math.PI/2) {
       const px=toPixX(x,cx,scaleX); ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,H); ctx.stroke();
     }
@@ -446,14 +444,14 @@ function drawMain(ts) {
   }
 
   if (showAxes) {
-    ctx.strokeStyle='#cbdccb'; ctx.lineWidth=1.5; // แกนหลักสีเทาผสมโทนเขียวจางๆ
+    ctx.strokeStyle='#1e5870'; ctx.lineWidth=1.5; // แกนหลักเด่นขึ้นมาในความมืด
     ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
-    ctx.fillStyle='#4a5d66'; ctx.font='11px JetBrains Mono,monospace'; ctx.textAlign='center';
+    ctx.fillStyle='#94a3b8'; ctx.font='11px JetBrains Mono,monospace'; ctx.textAlign='center';
     const ticks=[-2*Math.PI,-Math.PI,0,Math.PI,2*Math.PI], labels=['-2π','-π','0','π','2π'];
     ticks.forEach((t,i)=>{
       const px=toPixX(t,cx,scaleX); ctx.fillText(labels[i],px,cy+16);
-      ctx.beginPath(); ctx.moveTo(px,cy-4); ctx.lineTo(px,cy+4); ctx.strokeStyle='#cbdccb'; ctx.lineWidth=1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(px,cy-4); ctx.lineTo(px,cy+4); ctx.strokeStyle='#1e5870'; ctx.lineWidth=1; ctx.stroke();
     });
     ctx.textAlign='right';
     for(let y=-3;y<=3;y++){
@@ -464,21 +462,21 @@ function drawMain(ts) {
   }
 
   if (showAmp) {
-    ctx.strokeStyle='#077A7D50'; ctx.lineWidth=1.5; ctx.setLineDash([6,4]);
+    ctx.strokeStyle='#7AE2CF60'; ctx.lineWidth=1.5; ctx.setLineDash([6,4]);
     [D+A, D-A].forEach(v=>{
       const py=toPixY(v,cy,scaleY);
       ctx.beginPath(); ctx.moveTo(0,py); ctx.lineTo(W,py); ctx.stroke();
     });
-    ctx.strokeStyle='#077A7D20';
+    ctx.strokeStyle='#7AE2CF20';
     ctx.beginPath(); ctx.moveTo(0,toPixY(D,cy,scaleY)); ctx.lineTo(W,toPixY(D,cy,scaleY)); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle='#077A7D'; ctx.font='10px JetBrains Mono,monospace'; ctx.textAlign='left';
+    ctx.fillStyle='#7AE2CF'; ctx.font='10px JetBrains Mono,monospace'; ctx.textAlign='left';
     ctx.fillText(`${(D+A).toFixed(2)}`,6,toPixY(D+A,cy,scaleY)-4);
     ctx.fillText(`${(D-A).toFixed(2)}`,6,toPixY(D-A,cy,scaleY)+12);
   }
 
   if (showRef) {
-    ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+    ctx.strokeStyle='#475569'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
     ctx.beginPath();
     for(let px=0;px<=W;px++){
       const x=(px-cx)/scaleX, y=Math.sin(x), py=toPixY(y,cy,scaleY);
@@ -487,10 +485,10 @@ function drawMain(ts) {
     ctx.stroke(); ctx.setLineDash([]);
   }
 
-  // เส้นกราฟหลัก ไล่เฉดสีจากสีมินต์ (#7AE2CF) ไปหาสีเทลเข้ม (#077A7D) ตามภาพเป้าหมาย
+  // เส้นกราฟหลักเฉดสีสว่างนีออนเรโทร เรืองแสงสวยงามในธีมมืด
   const grad = ctx.createLinearGradient(0,0,W,0);
-  grad.addColorStop(0,'#7AE2CF'); grad.addColorStop(0.5,'#077A7D'); grad.addColorStop(1,'#06202B');
-  ctx.strokeStyle=grad; ctx.lineWidth=4; ctx.shadowBlur=4; ctx.shadowColor='rgba(7,122,125,0.15)';
+  grad.addColorStop(0,'#7AE2CF'); grad.addColorStop(0.5,'#077A7D'); grad.addColorStop(1,'#FDEB9E');
+  ctx.strokeStyle=grad; ctx.lineWidth=4; ctx.shadowBlur=10; ctx.shadowColor='rgba(122,226,207,0.4)';
   ctx.beginPath();
   for(let px=0;px<=W;px++){
     const x=(px-cx)/scaleX, y=A*Math.sin(B*x - C + phase).toFixed(5)*1 + D, py=toPixY(y,cy,scaleY);
@@ -498,18 +496,17 @@ function drawMain(ts) {
   }
   ctx.stroke(); ctx.shadowBlur=0;
 
-  // จุดตัดแกนหมุนย้ายค่าและแสดงสัญญลักษณ์
   if (showDot||showTrace) {
     const ty=A*Math.sin(-C+phase)+D;
     const dpx=toPixX(0,cx,scaleX), dpy=toPixY(ty,cy,scaleY);
     if (showTrace) {
-      ctx.strokeStyle='#077A7D40'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+      ctx.strokeStyle='#7AE2CF40'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
       ctx.beginPath(); ctx.moveTo(dpx,cy); ctx.lineTo(dpx,dpy); ctx.stroke(); ctx.setLineDash([]);
     }
     if (showDot) {
-      ctx.fillStyle='#077A7D'; ctx.shadowBlur=8; ctx.shadowColor='rgba(7,122,125,0.3)';
+      ctx.fillStyle='#7AE2CF'; ctx.shadowBlur=12; ctx.shadowColor='rgba(122,226,207,0.6)';
       ctx.beginPath(); ctx.arc(dpx,dpy,7,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
-      ctx.fillStyle='#06202B'; ctx.font='bold 12px JetBrains Mono,monospace'; ctx.textAlign='left';
+      ctx.fillStyle='#e2e8f0'; ctx.font='bold 12px JetBrains Mono,monospace'; ctx.textAlign='left';
       ctx.fillText(`y = ${ty.toFixed(3)}`, dpx+12, dpy-8);
     }
     document.getElementById('curY').textContent=ty.toFixed(4);
@@ -539,20 +536,20 @@ function drawMini(id, waveFn, refFn, color, refColor) {
   const xRange=4*Math.PI, scaleX=W/xRange, scaleY=H/6;
 
   ctx2.clearRect(0,0,W,H);
-  ctx2.fillStyle='#fdfcf7'; ctx2.fillRect(0,0,W,H); // มินิแคนวาสเป็นสีครีมเบจจางๆ นุ่มสายตา
+  ctx2.fillStyle='#093444'; ctx2.fillRect(0,0,W,H); // ย่อยเป็นสีกรมท่าอมเขียวเข้ม
 
-  ctx2.strokeStyle='#f0ede4'; ctx2.lineWidth=1;
+  ctx2.strokeStyle='#0d4256'; ctx2.lineWidth=1;
   for(let x=-xRange/2;x<=xRange/2;x+=Math.PI/2){
     const px=cx+x*scaleX; ctx2.beginPath(); ctx2.moveTo(px,0); ctx2.lineTo(px,H); ctx2.stroke();
   }
   for(let y=-2;y<=2;y+=1){
     const py=cy-y*scaleY; ctx2.beginPath(); ctx2.moveTo(0,py); ctx2.lineTo(W,py); ctx2.stroke();
   }
-  ctx2.strokeStyle='#cbd5e1'; ctx2.lineWidth=1.2;
+  ctx2.strokeStyle='#14495c'; ctx2.lineWidth=1.2;
   ctx2.beginPath(); ctx2.moveTo(0,cy); ctx2.lineTo(W,cy); ctx2.stroke();
   ctx2.beginPath(); ctx2.moveTo(cx,0); ctx2.lineTo(cx,H); ctx2.stroke();
 
-  ctx2.strokeStyle=refColor||'#94a3b8'; ctx2.lineWidth=1.5; ctx2.setLineDash([4,3]);
+  ctx2.strokeStyle=refColor||'#475569'; ctx2.lineWidth=1.5; ctx2.setLineDash([4,3]);
   ctx2.beginPath();
   for(let px=0;px<=W;px++){
     const x=(px-cx)/scaleX, y=refFn(x), py=cy-y*scaleY;
@@ -561,7 +558,7 @@ function drawMini(id, waveFn, refFn, color, refColor) {
   ctx2.stroke(); ctx2.setLineDash([]);
 
   ctx2.strokeStyle=color; ctx2.lineWidth=2.5;
-  ctx2.shadowBlur=4; ctx2.shadowColor=color+'40';
+  ctx2.shadowBlur=6; ctx2.shadowColor=color+'60';
   ctx2.beginPath();
   for(let px=0;px<=W;px++){
     const x=(px-cx)/scaleX, y=waveFn(x), py=cy-y*scaleY;
@@ -571,10 +568,10 @@ function drawMini(id, waveFn, refFn, color, refColor) {
 }
 
 function drawMiniCanvases() {
-  drawMini('cvA', x => A*Math.sin(x+phase), x => Math.sin(x+phase), '#077A7D','#cbd5e1');
-  drawMini('cvB', x => Math.sin(B*x+phase), x => Math.sin(x+phase), '#2563eb','#cbd5e1');
-  drawMini('cvC', x => Math.sin(x - C), x => Math.sin(x), '#db2777','#cbd5e1');
-  drawMini('cvD', x => Math.sin(x+phase)+D, x => Math.sin(x+phase), '#059669','#cbd5e1');
+  drawMini('cvA', x => A*Math.sin(x+phase), x => Math.sin(x+phase), '#7AE2CF','#475569');
+  drawMini('cvB', x => Math.sin(B*x+phase), x => Math.sin(x+phase), '#60a5fa','#475569');
+  drawMini('cvC', x => Math.sin(x - C), x => Math.sin(x), '#f472b6','#475569');
+  drawMini('cvD', x => Math.sin(x+phase)+D, x => Math.sin(x+phase), '#34d399','#475569');
   updateStretchUI();
 }
 
